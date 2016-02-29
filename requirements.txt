@@ -14,4 +14,4 @@ requests
 django
 djangorestframework
 django-compressor==1.5
--e git://github.com/openhealthcare/opal.git@master#egg=opal
+-e git://github.com/openhealthcare/opal.git@winpath-viewer#egg=opal
