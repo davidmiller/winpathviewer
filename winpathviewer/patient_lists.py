@@ -14,6 +14,10 @@ class WithResultsList(patient_lists.PatientList):
 
     schema = [
         models.Demographics,
+        models.Location,
+        models.PastMedicalHistory,
+        models.Treatment,
+        models.Diagnosis,
         models.WinPathResult
     ]
 

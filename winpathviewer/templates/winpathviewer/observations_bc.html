@@ -1,0 +1,5 @@
+<td ng-show="['BLOOD CULTURES', 'STATUS'].indexOf(obs.test_name) == -1">Blood Culture</td>
+<td ng-show="['BLOOD CULTURES', 'STATUS'].indexOf(obs.test_name) == -1">
+  <span ng-show="item.profile_code=='BC' && obs.test_code=='BISO'"><pre>[[ obs.observation_value.cultureText() ]]</pre></span>
+  <span ng-show="item.profile_code!='BC' || obs.test_code!='BISO'">[[ obs.observation_value ]] [[ obs.units ]]</span>
+</td>

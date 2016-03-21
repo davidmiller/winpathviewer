@@ -1,0 +1,5 @@
+      <td>[[ obs.test_name ]]</td>
+      <td>
+        <span ng-show="item.profile_code=='BC' && obs.test_code=='BISO'"><pre>[[ obs.observation_value.cultureText() ]]</pre></span>
+        <span ng-show="item.profile_code!='BC' || obs.test_code!='BISO'">[[ obs.observation_value ]] [[ obs.units ]]</span>
+      </td>

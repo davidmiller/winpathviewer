@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-5">
+    <b>Lab Number</b> [[ item.lab_number ]]
+    <span ng-show="item.result_status">([[ item.result_status ]]) <br /></span>
+    <span ng-show="item.profile_description"><b>Profile Description</b> [[ item.profile_description ]] <br /></span>
+    <span ng-show="item.request_datetime">
+      <b>Request Datetime</b> [[ item.request_datetime | shortDate ]] <br />
+    </span>
+  </div>
+  <div class="col-md-7">
+    <table class="table">
+      <tr>
+        <th colspan="2">Test</th>
+        <th>Value</th>
+        <th>Reference Range</th>
+        <th>Show?</th>
+      </tr>
+      <tr ng-repeat="obs in item.observations">
+        <td colspan="2">[[ obs.test_name ]]</td>
+        <td>
+          <span ng-show="item.profile_code=='BC' && obs.test_code=='BISO'"><pre>[[ obs.observation_value.cultureText() ]]</pre></span>
+          <span ng-show="item.profile_code!='BC' || (obs.test_code!='BISO' && obs.test_name != 'SENSITIVE' && obs.test_name != 'RESISTENT')">[[ obs.observation_value ]] [[ obs.units ]]</span>
+
+          <span ng-show="item.profile_code == 'BC' && obs.test_name=='SENSITIVE'">
+            <p ng-repeat="abx in obs.observation_value">[[ abx ]]</p>
+          </span>
+          <span ng-show="item.profile_code == 'BC' && obs.test_name=='RESISTENT'">
+            <p ng-repeat="org in obs.observation_value">[[ org ]]</p>
+          </span>
+        </td>
+        <td>[[ obs.reference_range ]]</td>
+        <td><i class="fa fa-star-o"></i></td>
+      </tr>
+    </table>
+  </div>
+</div>

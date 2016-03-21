@@ -1,0 +1,28 @@
+{% extends 'patient_detail_base.html' %}
+
+{% block viewnavigation %}
+
+    <a class="list-group-item episodelist pointer"
+     ng-class="{'bg-active': view == 'winpath'}"
+     ng-click="switch_to_episode(0, $event) && switch_to_view('winpath')"
+     href="[[ '/#/patient/' + patient.id + '/winpath' ]]"
+     >
+    Winpath Results
+  </a>
+
+  <a class="list-group-item episodelist pointer"
+     ng-class="{'bg-active': view == 'winpath-detail'}"
+     ng-click="switch_to_episode(0, $event) && switch_to_view('winpath-detail')"
+     href="[[ '/#/patient/' + patient.id + '/winpath-detail' ]]"
+     >
+    Winpath Detail
+  </a>
+{% endblock %}
+{% block viewtemplates %}
+  <div class="row" ng-show="view == 'winpath'">
+    {% include 'detail/winpath.html' %}
+  </div>
+  <div class="row" ng-show="view == 'winpath-detail'">
+    {% include 'detail/winpath_detail.html' %}
+  </div>
+{% endblock %}

@@ -1,34 +1,29 @@
-<div class="col-md-3">
-  <b>Lab Number</b> [[ item.lab_number ]]
-  <span ng-show="item.result_status">([[ item.result_status ]]) <br /></span>
-  <br />
-  <span ng-show="item.profile_code"><b>Profile Code</b> [[ item.profile_code ]] <br /></span>
-  <span ng-show="item.profile_description"><b>Profile Description</b>[[ item.profile_description ]] <br /></span>
-  <span ng-show="item.request_datetime">
-    <b>Request Datetime</b>[[ item.request_datetime | shortDate ]] <br />
-  </span>
-  <span ng-show="item.observation_datetime">
-    <b>Observation Datetime</b>
-    [[ item.observation_datetime | shortDate ]]
-    <br />
-  </span>
-  <span ng-show="item.last_edited">
-    <b>Last Edited</b>
-    [[ item.last_edited | shortDate ]] <br /></span>
-</div>
-<div class="col-md-8" style="max-height: 300px; overflow-y: scroll;">
-  <table class="table">
+<div ng-show="item.visible_in_list">
+
+  <!-- <b>[[ item.request_datetime | shortDate ]]</b><br/> -->
+  <!-- <span ng-repeat="obs in item.observations"> -->
+  <!--   [[ obs.test_name ]] -->
+  <!--   <span ng-show="item.profile_code=='BC' && obs.test_code=='BISO'"><pre>[[ obs.observation_value.cultureText() ]]</pre></span> -->
+  <!--   <span ng-show="item.profile_code!='BC' || obs.test_code!='BISO'">[[ obs.observation_value ]] [[ obs.units ]]</span> -->
+  <!--   <br /> -->
+  <!-- </span> -->
+
+  <table class="table table-condensed">
     <tr>
-      <th colspan="2">Test</th>
-      <th>Status</th>
+      <td colspan="2">
+          Request Date <b>[[ item.request_datetime | shortDate ]]</b>
+          <span class="pull-right"><i class="fa fa-close"></i></span>
+      </td>
+    <tr>
+    <tr>
+      <th>Test</th>
       <th>Value</th>
-      <th>Reference Range</th>
     </tr>
-    <tr ng-repeat="obs in item.observations">
-      <td colspan="2">[[ obs.test_name ]]</td>
-      <td>[[ obs.result_status ]]</td>
-      <td>[[ obs.observation_value ]] [[ obs.units ]]</td>
-      <td>[[ obs.reference_range ]]</td>
+
+    <tr ng-repeat="obs in item.observations"
+        ng-include="['GYNC', 'BC'].indexOf(item.profile_code) >= 0 ? '/templates/winpathviewer/observations_'+ item.profile_code.toLowerCase() +'.html' : '/templates/winpathviewer/observations.html';">
     </tr>
+
   </table>
+
 </div>

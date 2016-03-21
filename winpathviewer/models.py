@@ -19,8 +19,10 @@ class Investigation(models.Investigation): pass
 
 class WinPathResult(models.EpisodeSubrecord):
     _read_only = True
+    _sort = 'profile_code'
 
     lab_number           = fields.CharField(max_length=200, blank=True, null=True)
+    visible_in_list      = fields.BooleanField(default=False)
     profile_code         = fields.CharField(max_length=200, blank=True, null=True)
     profile_description  = fields.CharField(max_length=200, blank=True, null=True)
     request_datetime     = fields.DateTimeField(blank=True, null=True)
@@ -39,15 +41,10 @@ class WinPathResult(models.EpisodeSubrecord):
         if klass.objects.filter(lab_number=lab_number).count() > 0:
             result = klass.objects.get(lab_number=lab_number)
             episode = result.episode
-            if not episode.active:
-                episode.active = True
-                episode.save()
             patient = episode.patient
-
         else:
-
-            patient, created = models.Patient.objects.get_or_create(
-                demographics__hospital_number=identifier)
+            patient = models.Patient.objects.first()
+#            patient = models.Patient.objects.all()[1]
             if patient.episode_set.count() == 0:
                 episode = patient.create_episode()
                 episode.active = True
@@ -64,7 +61,7 @@ class WinPathResult(models.EpisodeSubrecord):
         result.request_datetime = date_from_key('request_datetime')
         result.observation_datetime = date_from_key('observation_datetime')
         result.last_edited = date_from_key('last_edited')
-        result.result_status = data['result_status']
+        result.result_status = data.get('result_status', None)
         result.observations = data['observations']
         result.save()
 

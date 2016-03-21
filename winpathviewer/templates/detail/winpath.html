@@ -1,0 +1,12 @@
+{% load panels %}
+{% load forms %}
+
+<div class="col-md-12">
+  <h2>Winpath Results</h2>
+  <form class="form-horizontal">
+    {% input label="Filter" model="hah"%}
+  </form>
+</div>
+<div class="col-md-12"> <!-- Detail panels col 1 -->
+  {% record_panel models.WinPathResult detail_template='winpathviewer/winpath_result.html' %}
+</div>                 <!-- Ends Detail panels col 2 -->

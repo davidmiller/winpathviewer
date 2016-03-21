@@ -1,0 +1,15 @@
+{% extends 'modal_base.html' %}
+{% block icon %}<i class="fa fa-flask"></i>{% endblock %}
+{% block modal_body %}
+  <form class="form-horizontal">
+    {% load forms %}
+    {% input "autofocus" label="Drug" model="editing.treatment.drug" lookuplist="antimicrobial_list" %}
+    {% datepicker label="Start date" model="editing.treatment.start_date" %}
+    {% datepicker label="End date" model="editing.treatment.end_date" %}
+    {% input label="Dose" model="editing.treatment.dose" %}
+    {% input label="Route" model="editing.treatment.route" lookuplist="antimicrobial_route_list" %}
+    {% input label="Frequency" model="editing.treatment.frequency" lookuplist="antimicrobial_frequency_list" %}
+  </form>
+
+</div>
+{% endblock %}
